@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EXPHUB</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f0f2f8;
+      --surface: #ffffff;
+      --accent: #5b5ef4;
+      --accent-hover: #4547d4;
+      --text-primary: #0f1117;
+      --text-secondary: #6b7280;
+      --text-muted: #9ca3af;
+      --border: #e5e7eb;
+      --shadow: 0 2px 12px rgba(0,0,0,0.07);
+      --radius: 16px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text-primary);
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-left: auto;
+    }
+
+    .breadcrumb .sep { color: var(--border); }
+
+    .breadcrumb .current {
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    /* ── Main layout ── */
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    /* ── Views ── */
+    .view { display: none; }
+    .view.active { display: block; }
+
+    /* ── Page title ── */
+    .page-title {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+    }
+
+    .page-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+    }
+
+    /* ── Folder grid ── */
+    .folder-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .folder-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      border: 1px solid transparent;
+    }
+
+    .folder-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(91,94,244,0.13);
+      border-color: var(--accent);
+    }
+
+ 
+
+    .folder-name {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .folder-meta {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .folder-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 9px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+      font-family: inherit;
+    }
+
+    .folder-btn:hover { background: var(--accent-hover); }
+
+    /* ── Back button ── */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: none;
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0;
+      margin-bottom: 24px;
+      font-family: inherit;
+      transition: opacity 0.15s;
+    }
+
+    .back-btn:hover { opacity: 0.7; }
+
+    /* ── File grid ── */
+    .file-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    .file-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 22px 18px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    .file-icon {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .file-name {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 14px;
+      color: var(--text-primary);
+      line-height: 1.4;
+      word-break: break-word;
+    }
+
+    .file-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .btn-open {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 9px;
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+      font-family: inherit;
+      text-decoration: none;
+    }
+
+    .btn-open:hover { background: var(--accent-hover); }
+
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 9px;
+      padding: 8px 11px;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background 0.15s;
+      text-decoration: none;
+      font-family: inherit;
+    }
+
+    .btn-download:hover { background: var(--accent-hover); }
+
+    /* ── Empty state ── */
+    .empty {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+    }
+
+    .empty-icon { font-size: 40px; margin-bottom: 12px; }
+    .empty-text { font-size: 14px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">EXP<span>HUB</span></div>
+  <div class="breadcrumb" id="breadcrumb">
+    <span class="current">Home</span>
+  </div>
+</header>
+
+<main>
+
+  <!-- ── View: Home (Folders) ── -->
+  <div class="view active" id="view-home">
+    <div class="page-title">Lab Files</div>
+    <div class="page-subtitle">Select a lab to view experiments</div>
+
+    <div class="folder-grid" id="folder-grid"></div>
+  </div>
+
+  <!-- ── View: Files inside a folder ── -->
+  <div class="view" id="view-files">
+    <button class="back-btn" onclick="goHome()">
+      ← Go Back
+    </button>
+
+    <div class="page-title" id="folder-title"></div>
+    <div class="page-subtitle" id="folder-subtitle"></div>
+
+    <div class="file-grid" id="file-grid"></div>
+  </div>
+
+</main>
+
+<script>
+  // ──────────────────────────────────────────────
+  //  DATA — update paths here to match your setup
+  // ──────────────────────────────────────────────
+  const folders = [
+    {
+      id: "cn-lab",
+      name: "CN LAB",
+
+      description: "Computer Networks",
+      files: [
+        { name: "Cisco Packet Tracer",       path: "./cn-lab/Cisco Packet Tracer.pdf" },
+        { name: "Cisco Packet (Alt)",         path: "./cn-lab/cisco-packet-.pdf" },
+        { name: "TCP Client–Server Application", path: "./cn-lab/TCP Client-Server Application.pdf" },
+        { name: "TCPIP Utility Commands",     path: "./cn-lab/TCPIP Utility Commands.pdf" },
+        { name: "UDP Client–Server",          path: "./cn-lab/UDP Client-Server.pdf" },
+      ]
+    },
+    {
+      id: "se-lab",
+      name: "SE LAB",
+  
+      description: "Software Engineering",
+      files: [
+        { name: "SE Practical", path: "./se-lab/SE-Practical.pdf" },
+      ]
+    }
+  ];
+  // ──────────────────────────────────────────────
+
+  const folderGrid = document.getElementById("folder-grid");
+  const fileGrid   = document.getElementById("file-grid");
+  const viewHome   = document.getElementById("view-home");
+  const viewFiles  = document.getElementById("view-files");
+  const breadcrumb = document.getElementById("breadcrumb");
+
+  // Render folder cards
+  folders.forEach(folder => {
+    const card = document.createElement("div");
+    card.className = "folder-card";
+    card.innerHTML = `
+
+      <div class="folder-name">${folder.name}</div>
+      <div class="folder-meta">${folder.description} &middot; ${folder.files.length} file${folder.files.length !== 1 ? 's' : ''}</div>
+      <button class="folder-btn" onclick="openFolder('${folder.id}')">Open →</button>
+    `;
+    folderGrid.appendChild(card);
+  });
+
+  function openFolder(id) {
+    const folder = folders.find(f => f.id === id);
+    if (!folder) return;
+
+    document.getElementById("folder-title").textContent = `${folder.name} Files`;
+    document.getElementById("folder-subtitle").textContent =
+      `${folder.files.length} file${folder.files.length !== 1 ? 's' : ''} available`;
+
+    breadcrumb.innerHTML = `
+      <span style="cursor:pointer;color:var(--accent)" onclick="goHome()">Home</span>
+      <span class="sep">/</span>
+      <span class="current">${folder.name}</span>
+    `;
+
+    fileGrid.innerHTML = "";
+
+    if (folder.files.length === 0) {
+      fileGrid.innerHTML = `
+        <div class="empty" style="grid-column:1/-1">
+          <div class="empty-icon">📭</div>
+          <div class="empty-text">No files in this folder yet</div>
+        </div>`;
+    } else {
+      folder.files.forEach((file, i) => {
+        const card = document.createElement("div");
+        card.className = "file-card";
+        card.innerHTML = `
+
+          <div class="file-name">${file.name}</div>
+          <div class="file-actions">
+            <a class="btn-open" href="${file.path}" target="_blank">Open →</a>
+            <a class="btn-download" href="${file.path}" download title="Download">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            </a>
+          </div>
+        `;
+        fileGrid.appendChild(card);
+      });
+    }
+
+    viewHome.classList.remove("active");
+    viewFiles.classList.add("active");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  function goHome() {
+    viewFiles.classList.remove("active");
+    viewHome.classList.add("active");
+    breadcrumb.innerHTML = `<span class="current">Home</span>`;
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+</script>
+</body>
+</html>
