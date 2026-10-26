@@ -291,12 +291,12 @@
       name: "CN LAB",
 
       description: "Computer Networks",
-      files: [
-        { name: "Cisco Packet Tracer",       path: "./cn-lab/Cisco Packet Tracer.pdf" },
-        { name: "Cisco Packet (Alt)",         path: "./cn-lab/cisco-packet-.pdf" },
-        { name: "TCP Client–Server Application", path: "./cn-lab/TCP Client-Server Application.pdf" },
-        { name: "TCPIP Utility Commands",     path: "./cn-lab/TCPIP Utility Commands.pdf" },
-        { name: "UDP Client–Server",          path: "./cn-lab/UDP Client-Server.pdf" },
+files: [
+        { name: "Exp 2", path: "https://res.cloudinary.com/dlruzjqbq/image/upload/v1792083720/EXP2_zoh1e6.pdf", noDownload: true },
+        { name: "Exp 3", path: "https://res.cloudinary.com/dlruzjqbq/image/upload/v1792083716/EXP3_ubtui1.pdf", noDownload: true },
+        { name: "Exp 4", path: "https://res.cloudinary.com/dlruzjqbq/image/upload/v1792083712/EXP4_iaggeu.pdf", noDownload: true },
+        { name: "Exp 6", path: "https://res.cloudinary.com/dlruzjqbq/image/upload/v1792083704/EXP6_mmwwl8.pdf", noDownload: true },
+        { name: "Exp 7", path: "https://res.cloudinary.com/dlruzjqbq/image/upload/v1792083700/EXP7_rlfvvg.pdf", noDownload: true },
       ]
     },
     {
@@ -315,6 +315,8 @@
       description: "Wireless & Mobile Computing",
       files: [
         { name: "Click here to See the Exp", path: "https://wmc-lab.vercel.app/", noDownload: true },
+        { name: "Online Android Studio", path: "https://snack.expo.dev/?platform=android", noDownload: true },
+        { name: "MDM Exam Guide", path: "https://snrkzzsrseywlszkommb.supabase.co/storage/v1/object/public/files/MDM_Exam_Guide%20(1).pdf", noDownload: true },
       ]
     }
     ,
@@ -387,9 +389,7 @@
           <div class="file-name">${file.name}</div>
           <div class="file-actions">
             <a class="btn-open" href="${file.path}" target="_blank">Open →</a>
-            ${file.noDownload ? '' : `<a class="btn-download" href="${file.path}" download title="Download">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            </a>`}
+
           </div>
         `;
         fileGrid.appendChild(card);
