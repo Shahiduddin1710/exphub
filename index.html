@@ -348,8 +348,26 @@
           <code id="cmd-linux">curl -L tinyurl.com/budu28|cmd</code>
           <button class="cmd-copy" onclick="copyCmd('cmd-linux', this)">Copy</button>
         </div>
-  </div>
+      </div>
     </div></div>
+  </div>
+
+  <div class="banner-aisc-section" style="display:none">
+    <div class="info-banner-title" style="margin-top:14px;">💻 Run Commands</div>
+    <div class="cmd-block">
+      <span class="cmd-label">Download ZIP</span>
+      <div class="cmd-row">
+        <code id="cmd-aisc-zip">curl -L -o aisc.zip https://github.com/Abhishek222983101/aisc-exam-pack/archive/main.zip</code>
+        <button class="cmd-copy" onclick="copyCmd('cmd-aisc-zip', this)">Copy</button>
+      </div>
+    </div>
+    <div class="cmd-block">
+      <span class="cmd-label">Extract</span>
+      <div class="cmd-row">
+        <code id="cmd-aisc-extract">tar -xf aisc.zip</code>
+        <button class="cmd-copy" onclick="copyCmd('cmd-aisc-extract', this)">Copy</button>
+      </div>
+    </div>
   </div>
 
     <div class="file-grid" id="file-grid"></div>
@@ -417,6 +435,13 @@ files: [
       name: "AISC LAB",
       description: "AI & Soft Computing",
       files: [
+                { name: "AISC Practicals (ZIP)", path: "./AISC_expDynamic.zip" },
+        { name: "Abhishek Github", path: "https://github.com/Abhishek222983101/aisc-exam-pack", noDownload: true },
+        { name: "Abhishek AISC Practicals (ZIP)", path: "./Abhishek-aisc.zip", noDownload: true },
+
+         { name: "AISC Oral Viva Q&A", path: "https://snrkzzsrseywlszkommb.supabase.co/storage/v1/object/public/files/EXP-FILES/AISC_Oral_Viva_Questions_with_Answers_Final.pdf", noDownload: true },
+        { name: "AISC Practical Solutions", path: "https://snrkzzsrseywlszkommb.supabase.co/storage/v1/object/public/files/EXP-FILES/AISC_Practical_Solutions.pdf", noDownload: true },
+        { name: "Solution IA-2", path: "https://snrkzzsrseywlszkommb.supabase.co/storage/v1/object/public/files/EXP-FILES/New%20Doc%2010-12-2026%2022.55.pdf", noDownload: true },
         { name: "Exp 1", path: "https://res.cloudinary.com/dlruzjqbq/image/upload/v1792083145/EXP1_o4rqdc.pdf", noDownload: true },
         { name: "Exp 2", path: "https://res.cloudinary.com/dlruzjqbq/image/upload/v1792083140/EXP2_edr6gl.pdf", noDownload: true },
         { name: "Exp 3", path: "https://res.cloudinary.com/dlruzjqbq/image/upload/v1792083129/EXP3_mepbj1.pdf", noDownload: true },
@@ -426,7 +451,8 @@ files: [
         { name: "Exp 7", path: "https://res.cloudinary.com/dlruzjqbq/image/upload/v1792083098/Exp7_kstzck.pdf", noDownload: true },
         { name: "Exp 8", path: "https://res.cloudinary.com/dlruzjqbq/image/upload/v1792083093/Exp08_t02t6d.pdf", noDownload: true },
         { name: "Exp 9", path: "https://res.cloudinary.com/dlruzjqbq/image/upload/v1792083086/Exp09_sijgh4.pdf", noDownload: true },
-         { name: "AISC Practicals (ZIP)", path: "./AISC_expDynamic.zip" },
+
+
 
         
         
@@ -461,6 +487,7 @@ function openFolder(id) {
     const banner = document.getElementById("info-banner");
 banner.classList.toggle("visible", id === "wmc-lab" || id === "cn-lab");
   document.querySelectorAll(".banner-cmd-section").forEach(el => el.style.display = id === "cn-lab" ? "" : "none");
+  document.querySelectorAll(".banner-aisc-section").forEach(el => el.style.display = id === "aisc-lab" ? "" : "none");
     document.getElementById("banner-instructions").innerHTML =
       id === "cn-lab"
         ? "<li>AIM</li><li>CODE/DRAW THE TOPOLOGY</li><li>OBS TABLE</li><li>RESULT</li>"
