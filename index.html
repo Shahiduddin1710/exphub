@@ -386,7 +386,9 @@
   
       description: "Software Engineering",
       files: [
-        { name: "SE Practical", path: "./se-lab/SE-Practical.pdf" },
+  
+        { name: "SE Zip", path: "./se-practical-exam-pack.zip" },
+
       ]
     }
     ,
@@ -404,18 +406,16 @@
   const breadcrumb = document.getElementById("breadcrumb");
 
   // Render folder cards
-  folders.forEach(folder => {
+folders.forEach(folder => {
     const card = document.createElement("div");
     card.className = "folder-card";
     card.innerHTML = `
-
       <div class="folder-name">${folder.name}</div>
-      <div class="folder-meta">${folder.description} &middot; ${folder.files.length} file${folder.files.length !== 1 ? 's' : ''}</div>
-      <button class="folder-btn" onclick="openFolder('${folder.id}')">Open →</button>
+      <div class="folder-meta">${folder.description}</div>
+      <a class="folder-btn" href="${folder.files[0].path}" target="_blank">Open →</a>
     `;
     folderGrid.appendChild(card);
   });
-
 function openFolder(id) {
     const folder = folders.find(f => f.id === id);
     if (!folder) return;
